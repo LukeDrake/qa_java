@@ -1,3 +1,4 @@
+import com.example.Feline;
 import com.example.Lion;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @RunWith(Parameterized.class)
@@ -19,27 +21,40 @@ public class TestsLion {
                 { "Самец", true }, { "Самка", false }
         });
     }
-    private final String sex;
+    private final String Sex;
     private final boolean Mane;
-    private Lion lionMock;
+    private Lion lion;
 
     public TestsLion(String sex, boolean mane) {
-        this.sex = sex;
+        this.Sex = sex;
         this.Mane = mane;
     }
 
     @Before
     public void setup() throws Exception {
-        this.lionMock = Mockito.spy(new Lion(sex));
-        when(lionMock.getKittens()).thenReturn(2);
-        when(lionMock.getFood()).thenReturn(List.of("Трава", "Различные растения"));
+        Feline felineMock = Mockito.mock(Feline.class);
+        when(felineMock.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        when(felineMock.getKittens()).thenReturn(2);
+        when(felineMock.getFamily()).thenReturn("Кошачьи");
+        when(felineMock.getKittens(anyInt())).thenReturn(2);
+
+        lion= new Lion(Sex, felineMock);
     }
 
     @Test
-    public void testPositive() throws Exception {
-        assertEquals (lionMock.getKittens(),2);
-        assertEquals (lionMock.getFood(), List.of("Трава", "Различные растения"));
-        assertEquals (lionMock.doesHaveMane(), Mane);
+    public void testPositiveLionKittens() {
+        assertEquals (lion.getKittens(),2);
 
         }
+    @Test
+    public void testPositiveLionFood() throws Exception {
+      assertEquals (lion.getFood(), List.of("Животные", "Птицы", "Рыба"));
+
+
+    }
+    @Test
+    public void testPositiveLionMane()  {
+               assertEquals (lion.doesHaveMane(), Mane);
+
+    }
     }

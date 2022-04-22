@@ -4,20 +4,28 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
+
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class TestsCat {
     @Test
-    public void catUnitTest() throws Exception {
+    public void catUnitTestFood() throws Exception {
+        Feline felineMock = Mockito.mock(Feline.class);
+        when(felineMock.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        Cat cat = new Cat(felineMock);
+
+        // Проверки
+        assertEquals(cat.getFood(), List.of("Животные", "Птицы", "Рыба"));
+    }
+    @Test
+    public void catUnitTestSound() throws Exception {
         Feline felineMock = Mockito.mock(Feline.class);
         Cat cat = new Cat(felineMock);
 
-        // Выводим в консоль результат
-        System.out.println(cat.getFood());
-        System.out.println(cat.getSound());
-
         // Проверки
-        assert Objects.equals(cat.getFood(), new ArrayList<String>());
-        assert cat.getSound().equals("Мяу");
+        assertEquals(cat.getSound(), "Мяу");
     }
 }

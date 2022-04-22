@@ -2,27 +2,40 @@ import com.example.Feline;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
+
 
 import static org.junit.Assert.assertEquals;
 
 
 public class TestsFeline {
     @Test
-    public void testFeline() throws Exception {
+    public void testFelineFood() throws Exception {
         Feline feline = new Feline();
-        System.out.println(feline.eatMeat());
-        System.out.println(feline.getFamily());
-        System.out.println(feline.getKittens());
-        System.out.println(feline.getKittens(2));
+             assertEquals(feline.eatMeat(), List.of("Животные", "Птицы", "Рыба"));
 
-        assertEquals(feline.eatMeat(), new ArrayList<String>() {{
-            add("Животные");
-            add("Птицы");
-            add("Рыба");
-        }});
+    }
+
+    @Test
+    public void testFelineFamily() throws Exception {
+        Feline feline = new Feline();
+
         assertEquals(feline.getFamily(), "Кошачьи");
+    }
+
+    @Test
+    public void testFelineKitten() throws Exception {
+        Feline feline = new Feline();
+
         assertEquals(feline.getKittens(), 1);
+        int kittensCount = 2;
+        assertEquals(feline.getKittens(kittensCount), kittensCount);
+
+    }
+
+    @Test
+    public void testFelineKittensMoreThenOne() throws Exception {
+        Feline feline = new Feline();
         int kittensCount = 2;
         assertEquals(feline.getKittens(kittensCount), kittensCount);
 
