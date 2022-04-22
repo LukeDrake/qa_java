@@ -17,7 +17,7 @@ public class TestsCat {
         when(felineMock.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         Cat cat = new Cat(felineMock);
 
-        // Проверки
+        // Проверк
         assertEquals(cat.getFood(), List.of("Животные", "Птицы", "Рыба"));
     }
     @Test
